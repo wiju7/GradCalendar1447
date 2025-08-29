@@ -64,14 +64,13 @@ body {
 </div>
 
 <script>
-const startDate = new Date("2025-08-07");
-const endDate = new Date("2026-01-08");
-
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function() {
+  const startDate = new Date("2025-08-07");
+  const endDate = new Date("2026-01-08");
   const countdownEl = document.getElementById("countdown");
   const now = new Date();
 
-  if(now < startDate){
+  if (now < startDate) {
     countdownEl.innerHTML = "سيبدأ العد التنازلي قريبًا يا خريجة";
   } else {
     const diff = endDate - now;
@@ -79,11 +78,11 @@ window.onload = function() {
     countdownEl.innerHTML = "عدد الأيام المتبقية للتخرج: " + days + " يوم";
   }
 
-  
+  // الانتقال بعد 7 ثواني
   setTimeout(() => {
-    window.location.href = "calendar.html"; 
+    window.location.href = "calendar.html";
   }, 7000);
-};
+});
 </script>
 </body>
 </html>
