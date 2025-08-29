@@ -57,49 +57,45 @@
   </style>
 
   <script>
-window.onload = function () {
-    const startDate = new Date("2025-08-07"); // بداية العد التنازلي
-    const endDate   = new Date("2026-01-08"); // نهاية التخرج
-    const countdownEl = document.getElementById("countdown");
+  window.onload = function () {
+      const startDate = new Date("2025-08-07");
+      const endDate   = new Date("2026-01-08");
+      const countdownEl = document.getElementById("countdown");
 
-    const now = new Date();
+      const now = new Date();
 
-    // إذا لم يبدأ العد بعد
-    if(now < startDate){
-        countdownEl.innerHTML = "سيبدأ العد التنازلي قريبًا يا خريجة";
-        return;
-    }
+      if(now < startDate){
+          countdownEl.innerHTML = "سيبدأ العد التنازلي قريبًا يا خريجة";
+          return;
+      }
 
-    // دالة لحساب وعرض الأيام المتبقية
-    function updateCountdown() {
-        const now = new Date();
-        let diff = endDate - now;
-        if(diff <= 0){
-            countdownEl.innerHTML = "مبروك! لقد حان وقت التخرج 🎓";
-            clearInterval(dayTimer);
-            return;
-        }
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        countdownEl.innerHTML = "عدد الأيام المتبقية للتخرج: " + days + " يوم";
-    }
+      function updateCountdown() {
+          const now = new Date();
+          let diff = endDate - now;
+          if(diff <= 0){
+              countdownEl.innerHTML = "مبروك! لقد حان وقت التخرج 🎓";
+              clearInterval(dayTimer);
+              return;
+          }
+          let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          countdownEl.innerHTML = "عدد الأيام المتبقية للتخرج: " + days + " يوم";
+      }
 
-    // تحديث كل يوم (أو كل ثانية لو أحببت)
-    updateCountdown(); // تحديث أولي
-    const dayTimer = setInterval(updateCountdown, 1000 * 60 * 60); // تحديث كل ساعة
+      updateCountdown();
+      const dayTimer = setInterval(updateCountdown, 1000 * 60 * 60);
 
-    // مثال للعد التنازلي بالثواني قبل التوجيه (اختياري)
-    let timeLeft = 5; // 5 ثواني
-    const timer = setInterval(() => {
-        countdownEl.innerHTML = "سيتم الانتقال إلى صفحة الكالندر بعد: " + timeLeft + " ثواني";
-        timeLeft--;
-        if(timeLeft < 0){
-            clearInterval(timer);
-            window.location.href = "calendar.html";
-        }
-    }, 1000);
-};
-</script>
-
+      // عد تنازلي للثواني قبل التوجيه
+      let timeLeft = 5;
+      const timer = setInterval(() => {
+          countdownEl.innerHTML = "سيتم الانتقال إلى صفحة الكالندر بعد: " + timeLeft + " ثواني";
+          timeLeft--;
+          if(timeLeft < 0){
+              clearInterval(timer);
+              window.location.href = "calendar.html";
+          }
+      }, 1000);
+  };
+  </script>
 </head>
 
 <body>
