@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<link rel="icon" href="/wb.png" type="image/png">
+	<link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+    <style>
+        /* إعداد الخلفية */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Tajawal', sans-serif;
+            background: url('https://images.pexels.com/photos/97077/pexels-photo-97077.jpeg') no-repeat center center/cover;
+            position: relative;
+        }
+
+        /* طبقة التمويه */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(0,0,0,0.3); /* غطاء خفيف فوق الخلفية */
+            z-index: 0;
+        }
+
+        /* المربع المركزي */
+        .login-box {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+            color: #390007; /* لون عميق للنص */
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 8px 12px 0.1px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .login-box button {
+			width: 220px; /* حجم الزر */
+			padding: 12px;
+			border: none;
+			border-radius: 8px;
+			background-color: #ff4081; /* وردي */
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			display: block;       
+			margin: 10px auto 0;  
+		}
+
+
+        .login-box button:hover {
+            background-color: #e73370; /* تغميق اللون عند التحويم */
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>اهلاً بالخريجة وجن!!</h2>
+        <input type="password" id="password" placeholder="كلمة المرور لتأكيد الهوية" required>
+        <div id="error" class="error-message"></div>
+        <button onclick="checkPassword()">تأكيد</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const pass = document.getElementById("password").value;
+            if (pass === "2002") {
+                window.location.href = "countdown.html";
+            } else {
+                document.getElementById("error").innerText = "❌ كلمة المرور غير صحيحة";
+            }
+        }
+    </script>
+</body>
+</html>
