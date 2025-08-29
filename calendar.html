@@ -365,7 +365,7 @@
     {title:'الأسبوع 1',dates:[
       {g:'2025-8-24',h:'1447-3-1'},{g:'2025-8-25',h:'1447-3-2'},{g:'2025-8-26',h:'1447-3-3'},{g:'2025-8-27',h:'1447-3-4'},{g:'2025-8-28',h:'1447-3-5'}]},
     {title:'الأسبوع 2',dates:[
-      {g:'2025-8-31',h:'1447-3-8'},{g:'2025-9-1',h:'1447-3-9'},{g:'2025-9-2',h:'1447-3-10'},{g:'2025-9-3',h:'1447-3-11'},{g:'2025-9-4',h:'1447-3-12'}]},
+      {g:'2025-8-29',h:'1447-3-8'},{g:'2025-9-1',h:'1447-3-9'},{g:'2025-9-2',h:'1447-3-10'},{g:'2025-9-3',h:'1447-3-11'},{g:'2025-9-4',h:'1447-3-12'}]},
     {title:'الأسبوع 3',dates:[
       {g:'2025-9-7',h:'1447-3-15'},{g:'2025-9-8',h:'1447-3-16'},{g:'2025-9-9',h:'1447-3-17'},{g:'2025-9-10',h:'1447-3-18'},{g:'2025-9-11',h:'1447-3-19'}]},
     {title:'الأسبوع 4',dates:[
@@ -474,22 +474,22 @@ weeks.forEach((week, index) => { // أضف index هنا
       <span class="greg">${d.g}</span>
     `;
 
-// إضافة التعتيم للأيام المنتهية
-const today = new Date();
-today.setHours(0,0,0,0);
-if (dateObj < today) {
-    row.style.position = 'relative';
-    const overlay = document.createElement('div');
-    overlay.style.position = 'absolute';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.right = '0';
-    overlay.style.bottom = '0';
-    overlay.style.backgroundColor = 'rgba(0,0,0,0.25)'; // نفس التعتيم
-    overlay.style.pointerEvents = 'none'; // لا تمنع النقر
-    overlay.style.borderRadius = '8px'; // جعل الحواف دائرية مثل الصف
-    row.appendChild(overlay);
-}
+	// إضافة التعتيم للأيام المنتهية
+	const today = new Date();
+	today.setHours(0,0,0,0);
+	if (dateObj < today) {
+		row.style.position = 'relative';
+		const overlay = document.createElement('div');
+		overlay.style.position = 'absolute';
+		overlay.style.top = '0';
+		overlay.style.left = '0';
+		overlay.style.right = '0';
+		overlay.style.bottom = '0';
+		overlay.style.backgroundColor = 'rgba(0,0,0,0.25)'; // نفس التعتيم
+		overlay.style.pointerEvents = 'none'; // لا تمنع النقر
+		overlay.style.borderRadius = '8px'; // جعل الحواف دائرية مثل الصف
+		row.appendChild(overlay);
+	}
     
     row.addEventListener('click', () => openModal({
       g: row.dataset.g,
