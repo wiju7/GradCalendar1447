@@ -1,106 +1,90 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عداد التخرج</title>
-  <link rel="icon" href="wb.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Tajawal', sans-serif;
-      background: url('https://images.pexels.com/photos/97077/pexels-photo-97077.jpeg') no-repeat center center/cover;
-      position: relative;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عداد التخرج</title>
+<link rel="icon" href="wb.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0; padding: 0; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Tajawal', sans-serif;
+    background: url('https://images.pexels.com/photos/97077/pexels-photo-97077.jpeg') no-repeat center center/cover;
+    position: relative;
+  }
 
-    /* طبقة التمويه */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      background-color: rgba(0,0,0,0.3);
-      z-index: 0;
-    }
+  body::before {
+    content: "";
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(0,0,0,0.3);
+    z-index: 0;
+  }
 
-    /* المربع المركزي للعداد */
-    .countdown-box {
-      position: relative;
-      z-index: 1;
-      background-color: #ff4081; /* نفس لون زر التأكيد */
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      width: 320px;
-      text-align: center;
-      color: white;
-    }
+  .countdown-box {
+    position: relative; z-index: 1;
+    background-color: #ff4081;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    width: 320px; text-align: center; color: white;
+  }
 
-    .countdown-box h1 {
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-
-    #countdown {
-      font-size: 20px;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-  </style>
-
-  <script>
-  window.onload = function () {
-      const startDate = new Date("2025-08-07");
-      const endDate   = new Date("2026-01-08");
-      const countdownEl = document.getElementById("countdown");
-
-      const now = new Date();
-
-      if(now < startDate){
-          countdownEl.innerHTML = "سيبدأ العد التنازلي قريبًا يا خريجة";
-          return;
-      }
-
-      function updateCountdown() {
-          const now = new Date();
-          let diff = endDate - now;
-          if(diff <= 0){
-              countdownEl.innerHTML = "مبروك! لقد حان وقت التخرج 🎓";
-              clearInterval(dayTimer);
-              return;
-          }
-          let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          countdownEl.innerHTML = "عدد الأيام المتبقية للتخرج: " + days + " يوم";
-      }
-
-      updateCountdown();
-      const dayTimer = setInterval(updateCountdown, 1000 * 60 * 60);
-
-      // عد تنازلي للثواني قبل التوجيه
-      let timeLeft = 5;
-      const timer = setInterval(() => {
-          countdownEl.innerHTML = "سيتم الانتقال إلى صفحة الكالندر بعد: " + timeLeft + " ثواني";
-          timeLeft--;
-          if(timeLeft < 0){
-              clearInterval(timer);
-              window.location.href = "calendar.html";
-          }
-      }, 1000);
-  };
-  </script>
+  .countdown-box h1 { margin-bottom: 20px; font-size: 24px; }
+  #days, #seconds { font-size: 20px; margin-top: 10px; font-weight: bold; }
+</style>
 </head>
 
 <body>
-  <div class="countdown-box">
-    <div id="countdown"></div>
-  </div>
+<div class="countdown-box">
+  <div id="days"></div>
+  <div id="seconds"></div>
+</div>
+
+<script>
+window.onload = function () {
+    const startDate = new Date("2025-08-07");
+    const endDate   = new Date("2026-01-08");
+    const daysEl = document.getElementById("days");
+    const secondsEl = document.getElementById("seconds");
+
+    const now = new Date();
+
+    if(now < startDate){
+        daysEl.innerHTML = "سيبدأ العد التنازلي قريبًا يا خريجة";
+        return;
+    }
+
+    // عرض عدد الأيام المتبقية
+    function updateDays() {
+        const now = new Date();
+        let diff = endDate - now;
+        if(diff <= 0){
+            daysEl.innerHTML = "مبروك! لقد حان وقت التخرج 🎓";
+            clearInterval(dayTimer);
+            return;
+        }
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        daysEl.innerHTML = "عدد الأيام المتبقية للتخرج: " + days + " يوم";
+    }
+
+    updateDays();
+    const dayTimer = setInterval(updateDays, 1000 * 60 * 60); // تحديث كل ساعة
+
+    // عد تنازلي 5 ثواني قبل الانتقال
+    let timeLeft = 5;
+    const timer = setInterval(() => {
+        secondsEl.innerHTML = "سيتم الانتقال إلى صفحة الكالندر بعد: " + timeLeft + " ثواني";
+        timeLeft--;
+        if(timeLeft < 0){
+            clearInterval(timer);
+            window.location.href = "calendar.html";
+        }
+    }, 1000);
+};
+</script>
 </body>
 </html>
